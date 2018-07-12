@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
+//import escapeRegExp from 'escape-string-regexp'
+//import sortBy from 'sort-by'
 import * as BooksAPI from './BooksAPI'
 
 
@@ -15,7 +15,7 @@ class SearchBooks extends React.Component {
 
 
 updateQuery = (query) => {
-        if (query != '') { // you need to set condition for query to prevent send '' empty query to api 
+        if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
             // you will get undefiend error
             BooksAPI.search(query).then(books => {
                 console.log(books)
