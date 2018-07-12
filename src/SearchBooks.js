@@ -27,6 +27,8 @@ updateQuery = (query) => {
                     this.setState({ books: [] })
                     showingBooks = [];
                 }
+
+                
             })
         }
     }
@@ -73,7 +75,7 @@ updateQuery = (query) => {
                         <li key={book.id}>
                             <div className="book">
                                 <div className="book-top">
-                                <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                                <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: book.imageLinks === undefined ? `url(https://s7.postimg.cc/shls4dbcb/persons.png)` : `url(${book.imageLinks.thumbnail})` }}></div>
                                 <div className="book-shelf-changer">
                                     <select>
                                     <option value="move" disabled>Move to...</option>
