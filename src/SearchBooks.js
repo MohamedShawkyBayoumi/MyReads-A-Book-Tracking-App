@@ -8,34 +8,30 @@ import * as BooksAPI from './BooksAPI'
 class SearchBooks extends React.Component {
 
     state = {
-        query: ''
+        books: []
     }
 
 
-    updateQuery = (query) => {
-        this.setState({ query })
-        BooksAPI.search(query).then(books => console.log(books))
+    updateQuery = (books) => {
+        
+        BooksAPI.search(books).then(books => {
+            this.setState({ books })
+            console.log(books)
+        })
     }
-
-    
-
-
-
-
 
 
     render(){
-/*
+
+        
         let showingBooks
-        if(this.state.query){
-            const match = new RegExp(escapeRegExp(this.state.query), 'i')
-            showingBooks = this.props.books.filter((book) => match.test(book.name))
+        if(this.state.books){
+            showingBooks = this.state.books.filter((book) => book.title)
         } else {
-            showingBooks = this.props.books
+            showingBooks = this.state.books
         }
 
-        //showingBooks.sort(sortBy('name'))
-*/
+        
 
 
         return (
@@ -62,7 +58,26 @@ class SearchBooks extends React.Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-
+              {showingBooks.map((book) => (
+                        <li key={book.title}>
+                            <div className="book">
+                                <div className="book-top">
+                                <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                                <div className="book-shelf-changer">
+                                    <select>
+                                    <option value="move" disabled>Move to...</option>
+                                    <option value="currentlyReading">Currently Reading</option>
+                                    <option value="wantToRead">Want to Read</option>
+                                    <option value="read">Read</option>
+                                    <option value="none">None</option>
+                                    </select>
+                                </div>
+                                </div>
+                                <div className="book-title">{book.title}</div>
+                                <div className="book-authors">{book.author}</div>
+                            </div>
+                        </li>
+                    ))}
               </ol>
             </div>
           </div>
