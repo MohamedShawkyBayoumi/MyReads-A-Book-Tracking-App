@@ -14,14 +14,13 @@ class SearchBooks extends React.Component {
 
     updateQuery = (query) => {
         this.setState({ query })
+        BooksAPI.search(query).then(books => console.log(books))
     }
 
     
 
-    searchRequest(book){
-        BooksAPI.search(book).then(books => console.log(books))
-    }
-    
+
+
 
 
 
@@ -56,7 +55,7 @@ class SearchBooks extends React.Component {
                     type="text"
                     placeholder="Search by title or author"
                     value={this.state.query}
-                    onChange={(event) => this.searchRequest(event.target.value)}
+                    onChange={(event) => this.updateQuery(event.target.value)}
                     />
                     {JSON.stringify(this.state)}
               </div>
