@@ -5,6 +5,8 @@ import sortBy from 'sort-by'
 import * as BooksAPI from './BooksAPI'
 
 
+let showingBooks = [];
+
 class SearchBooks extends React.Component {
 
     state = {
@@ -12,24 +14,33 @@ class SearchBooks extends React.Component {
     }
 
 
-    updateQuery = (books) => {
-        
-        BooksAPI.search(books).then(books => {
-            this.setState({ books })
-            console.log(books)
-        })
-    }
+updateQuery = (query) => {
+        if (query != '') { // you need to set condition for query to prevent send '' empty query to api 
+            // you will get undefiend error
+            BooksAPI.search(query).then(books => {
+                console.log(books)
+                this.setState({ books })
+                if (books.error !== 'empty query') {
+                    showingBooks = this.state.books;
 
+                } else {
+                    this.setState({ books: [] })
+                    showingBooks = [];
+                }
+            })
+        }
+    }
 
     render(){
 
-        
+        /*
         let showingBooks
         if(this.state.books){
             showingBooks = this.state.books.filter((book) => book.title)
         } else {
             showingBooks = this.state.books
         }
+*/
 
         
 
@@ -59,7 +70,7 @@ class SearchBooks extends React.Component {
             <div className="search-books-results">
               <ol className="books-grid">
               {showingBooks.map((book) => (
-                        <li key={book.title}>
+                        <li key={book.id}>
                             <div className="book">
                                 <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
