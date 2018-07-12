@@ -53,7 +53,7 @@ class SearchBooks extends React.Component {
                     value={this.state.query}
                     onChange={(event) => this.updateQuery(event.target.value)}
                     />
-                    {JSON.stringify(this.state)}
+                    
               </div>
             </div>
             <div className="search-books-results">
