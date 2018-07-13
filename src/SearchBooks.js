@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 //import escapeRegExp from 'escape-string-regexp'
 //import sortBy from 'sort-by'
 import * as BooksAPI from './BooksAPI'
+import BookChanger from './BookChanger'
 
 
 let showingBooks = [];
@@ -77,13 +78,7 @@ updateQuery = (query) => {
                                 <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: book.imageLinks === undefined ? `url(https://s7.postimg.cc/shls4dbcb/persons.png)` : `url(${book.imageLinks.thumbnail})` }}></div>
                                 <div className="book-shelf-changer">
-                                    <select>
-                                    <option value="move" disabled>Move to...</option>
-                                    <option value="currentlyReading">Currently Reading</option>
-                                    <option value="wantToRead">Want to Read</option>
-                                    <option value="read">Read</option>
-                                    <option value="none">None</option>
-                                    </select>
+                                    <BookChanger/>
                                 </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>

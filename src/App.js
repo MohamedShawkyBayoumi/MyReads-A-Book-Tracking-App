@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 
 
+
+
 class BooksApp extends React.Component {
   state = {
     /**
@@ -22,12 +24,13 @@ class BooksApp extends React.Component {
 
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
-      //console.log(books)
+      console.log(books)
       this.setState({ books })
       
     })
 
-    
+
+
 
     
   }
