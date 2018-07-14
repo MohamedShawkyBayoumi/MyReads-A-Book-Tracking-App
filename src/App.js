@@ -68,12 +68,21 @@ class BooksApp extends React.Component {
 
 
 
-  selectionRequest = (book, shelf) => {
+  changeShelf = (book, shelf) => {
+    
     BooksAPI.update(book, shelf).then(() => {
       console.log(book)
-      console.log(shelf)
+      console.log(shelf.shelf)
+
+      shelf.shelf = book;
+
+      
+
+      
+
     })
   }
+
 
 
   /*
@@ -108,13 +117,13 @@ class BooksApp extends React.Component {
                     {/* What I did was passing a props "title" with the shelf value, and filter the books so only those with the 
                   matching shelf are displayed in the related component */}
                 <h2 className="bookshelf-title">Currently Reading</h2>
-                <BookShelf title="currentlyReading" books={this.state.books} changeShelf={this.changeShelf} selectionRequest={this.selectionRequest}/>
+                <BookShelf title="currentlyReading" books={this.state.books} changeShelf={this.changeShelf}/>
 
                 <h2 className="bookshelf-title">Want to Read</h2>
-                <BookShelf title="wantToRead" books={this.state.books} changeShelf={this.changeShelf} selectionRequest={this.selectionRequest}/>
+                <BookShelf title="wantToRead" books={this.state.books} changeShelf={this.changeShelf}/>
 
                 <h2 className="bookshelf-title">Read</h2>
-                <BookShelf title="read" books={this.state.books} changeShelf={this.changeShelf} selectionRequest={this.selectionRequest}/>
+                <BookShelf title="read" books={this.state.books} changeShelf={this.changeShelf}/>
 
                 </div>
             </div>
