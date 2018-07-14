@@ -54,7 +54,7 @@ class SearchBooks extends React.Component {
                                 <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: book.imageLinks === undefined ? `url(https://s7.postimg.cc/shls4dbcb/persons.png)` : `url(${book.imageLinks.thumbnail})` }}></div>
                                 <div className="book-shelf-changer">
-                                    <BookChanger/>
+                                    <BookChanger book={book} changeShelf={this.props.changeShelf} />
                                 </div>
                                 </div>
                                 <div className="book-title">{book.title}</div>
