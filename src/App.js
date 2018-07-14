@@ -76,8 +76,9 @@ class BooksApp extends React.Component {
 
       shelf.shelf = book;
 
-      
+      console.log(shelf)
 
+      this.setState({ books: [shelf] })
       
 
     })
