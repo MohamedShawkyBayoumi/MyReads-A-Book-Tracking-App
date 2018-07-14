@@ -32,25 +32,51 @@ class BooksApp extends React.Component {
 
   }
 
-  
+
+
+/*
+  searchQuery = (query) => {
+    if (query !== '') { 
+      BooksAPI.search(query).then(books => {
+        if (books.error !== 'empty query') {
+          this.setState({ displayForSearch: books })
+        } else {
+          this.setState({ displayForSearch: [] })
+        }
+      })
+    }
+  }
+
+  */
+
   searchQuery = (query) => {
     if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
         // you will get undefiend error
         BooksAPI.search(query).then(books => {
             console.log(books)
-            this.setState({ displayForSearch: books })
-            
-            if(books.error !== 'empty query'){
+            console.log(this.props.displayForSearch)
+            if (books.error !== 'empty query') {
               this.setState({ displayForSearch: books })
             } else {
               this.setState({ displayForSearch: [] })
             }
+            
         })
     }
   }
 
 
 
+
+  selectionRequest = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      console.log(book)
+      console.log(shelf)
+    })
+  }
+
+
+  /*
   changeShelf = (book,shelf) => {
     BooksAPI.update(book,shelf).then(() => {
       //console.log(data)
@@ -66,7 +92,7 @@ class BooksApp extends React.Component {
     })
   }
 
-
+*/
 
 
   render() {
@@ -82,13 +108,13 @@ class BooksApp extends React.Component {
                     {/* What I did was passing a props "title" with the shelf value, and filter the books so only those with the 
                   matching shelf are displayed in the related component */}
                 <h2 className="bookshelf-title">Currently Reading</h2>
-                <BookShelf title="currentlyReading" books={this.state.books} changeShelf={this.changeShelf}/>
+                <BookShelf title="currentlyReading" books={this.state.books} changeShelf={this.changeShelf} selectionRequest={this.selectionRequest}/>
 
                 <h2 className="bookshelf-title">Want to Read</h2>
-                <BookShelf title="wantToRead" books={this.state.books} changeShelf={this.changeShelf}/>
+                <BookShelf title="wantToRead" books={this.state.books} changeShelf={this.changeShelf} selectionRequest={this.selectionRequest}/>
 
                 <h2 className="bookshelf-title">Read</h2>
-                <BookShelf title="read" books={this.state.books} changeShelf={this.changeShelf}/>
+                <BookShelf title="read" books={this.state.books} changeShelf={this.changeShelf} selectionRequest={this.selectionRequest}/>
 
                 </div>
             </div>
