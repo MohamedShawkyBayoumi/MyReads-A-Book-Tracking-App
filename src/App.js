@@ -29,11 +29,16 @@ class BooksApp extends React.Component {
       
     })
 
-
-
-
-    
   }
+
+
+  changeShelf = (newBook,newShelf) => {
+    BooksAPI.update(newBook,newShelf).then(response => {
+        console.log(response)
+    })
+
+  }
+
 
   render() {
     return (
@@ -48,13 +53,13 @@ class BooksApp extends React.Component {
                     {/* What I did was passing a props "title" with the shelf value, and filter the books so only those with the 
                   matching shelf are displayed in the related component */}
                 <h2 className="bookshelf-title">Currently Reading</h2>
-                <BookShelf title="currentlyReading" books={this.state.books}/>
+                <BookShelf title="currentlyReading" books={this.state.books} changeShelf={this.changeShelf}/>
 
                 <h2 className="bookshelf-title">Want to Read</h2>
-                <BookShelf title="wantToRead" books={this.state.books}/>
+                <BookShelf title="wantToRead" books={this.state.books} changeShelf={this.changeShelf}/>
 
                 <h2 className="bookshelf-title">Read</h2>
-                <BookShelf title="read" books={this.state.books}/>
+                <BookShelf title="read" books={this.state.books} changeShelf={this.changeShelf}/>
 
                 </div>
             </div>
