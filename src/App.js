@@ -18,7 +18,8 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    books: []
+    books: [],
+    displayForSearch: []
 
   }
 
@@ -32,17 +33,17 @@ class BooksApp extends React.Component {
   }
 
   
-  updateQuery = (query) => {
+  searchQuery = (query) => {
     if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
         // you will get undefiend error
         BooksAPI.search(query).then(books => {
             console.log(books)
-            this.setState({ books })
-
+            this.setState({ displayForSearch: books })
+            
             if(books.error !== 'empty query'){
-              this.setState({ books })
+              this.setState({ displayForSearch: books })
             } else {
-              this.setState({ books: [] })
+              this.setState({ displayForSearch: [] })
             }
         })
     }
@@ -55,9 +56,9 @@ class BooksApp extends React.Component {
       //console.log(data)
       //book.shelf = shelf
       console.log(book)
-      console.log(shelf.books[0].shelf)
+      console.log(shelf)
 
-      shelf.books[0].shelf = book
+      //shelf.books[0].shelf = book
 
       this.setState({ books: shelf.books })
 
@@ -99,7 +100,7 @@ class BooksApp extends React.Component {
         )}/>
           
         <Route path='/search' render={() => (
-          <SearchBooks showingBooks={this.state.showingBooks} updateQuery={this.updateQuery} books={this.state.books}/>
+          <SearchBooks searchQuery={this.searchQuery} displayForSearch={this.state.displayForSearch}/>
         )}/>
           
         

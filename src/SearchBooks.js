@@ -39,7 +39,7 @@ class SearchBooks extends React.Component {
                     type="text"
                     placeholder="Search by title or author"
                     value={this.props.query}
-                    onChange={(event) => this.props.updateQuery(event.target.value)}
+                    onChange={(event) => this.props.searchQuery(event.target.value)}
                     />
                     
               </div>
@@ -47,7 +47,7 @@ class SearchBooks extends React.Component {
             <div className="search-books-results">
               <ol className="books-grid">
               
-              {this.props.books.map((book) => (
+              {this.props.displayForSearch.map((book) => (
                   
                         <li key={book.id}>
                             <div className="book">
