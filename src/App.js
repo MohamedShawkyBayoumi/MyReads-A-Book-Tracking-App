@@ -31,13 +31,41 @@ class BooksApp extends React.Component {
 
   }
 
-
-  changeShelf = (newBook,newShelf) => {
-    BooksAPI.update(newBook,newShelf).then(response => {
-        console.log(response)
-    })
-
+  
+  updateQuery = (query) => {
+    if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
+        // you will get undefiend error
+        BooksAPI.search(query).then(books => {
+            console.log(books)
+            this.setState({ books })
+            
+            if(books.error !== 'empty query'){
+              this.state.books
+            } else {
+              this.setState({ books: [] })
+            }
+        })
+    }
   }
+
+
+
+  changeShelf = (book,shelf) => {
+    BooksAPI.update(book,shelf).then(() => {
+      //console.log(data)
+      //book.shelf = shelf
+      console.log(book)
+      console.log(shelf.books[0].shelf)
+
+      shelf.books.shelf = book
+
+      this.setState({ books: shelf.books })
+
+      console.log(shelf)
+    })
+  }
+
+
 
 
   render() {
@@ -71,7 +99,7 @@ class BooksApp extends React.Component {
         )}/>
           
         <Route path='/search' render={() => (
-          <SearchBooks/>
+          <SearchBooks showingBooks={this.state.showingBooks} updateQuery={this.updateQuery} books={this.state.books}/>
         )}/>
           
         

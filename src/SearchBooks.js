@@ -2,37 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 //import escapeRegExp from 'escape-string-regexp'
 //import sortBy from 'sort-by'
-import * as BooksAPI from './BooksAPI'
 import BookChanger from './BookChanger'
 
 
-let showingBooks = [];
+
 
 class SearchBooks extends React.Component {
 
-    state = {
-        books: []
-    }
-
-
-updateQuery = (query) => {
-        if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
-            // you will get undefiend error
-            BooksAPI.search(query).then(books => {
-                console.log(books)
-                this.setState({ books })
-                if (books.error !== 'empty query') {
-                    showingBooks = this.state.books;
-
-                } else {
-                    this.setState({ books: [] })
-                    showingBooks = [];
-                }
-
-                
-            })
-        }
-    }
 
     render(){
 
@@ -46,8 +22,6 @@ updateQuery = (query) => {
 */
 
         
-
-
         return (
             <div className="search-books">
             <div className="search-books-bar">
@@ -64,15 +38,17 @@ updateQuery = (query) => {
                 <input
                     type="text"
                     placeholder="Search by title or author"
-                    value={this.state.query}
-                    onChange={(event) => this.updateQuery(event.target.value)}
+                    value={this.props.query}
+                    onChange={(event) => this.props.updateQuery(event.target.value)}
                     />
                     
               </div>
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-              {showingBooks.map((book) => (
+              
+              {this.props.books.map((book) => (
+                  
                         <li key={book.id}>
                             <div className="book">
                                 <div className="book-top">
