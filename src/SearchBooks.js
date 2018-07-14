@@ -3,12 +3,33 @@ import { Link } from 'react-router-dom'
 //import escapeRegExp from 'escape-string-regexp'
 //import sortBy from 'sort-by'
 import BookChanger from './BookChanger'
-
+import * as BooksAPI from './BooksAPI'
 
 
 
 class SearchBooks extends React.Component {
 
+    state = {
+        displayForSearch: []
+    }
+
+
+    searchQuery = (query) => {
+        if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
+            // you will get undefiend error
+            BooksAPI.search(query).then(books => {
+                console.log(books)
+                console.log(this.props.displayForSearch)
+                if (books.error !== 'empty query') {
+                  this.setState({ displayForSearch: books })
+                } else {
+                  this.setState({ displayForSearch: [] })
+                }
+                
+            })
+        }
+      }
+    
 
     render(){
 
@@ -39,7 +60,7 @@ class SearchBooks extends React.Component {
                     type="text"
                     placeholder="Search by title or author"
                     value={this.props.query}
-                    onChange={(event) => this.props.searchQuery(event.target.value)}
+                    onChange={(event) => this.searchQuery(event.target.value)}
                     />
                     
               </div>
@@ -47,7 +68,7 @@ class SearchBooks extends React.Component {
             <div className="search-books-results">
               <ol className="books-grid">
               
-              {this.props.displayForSearch.map((book) => (
+              {this.state.displayForSearch.map((book) => (
                   
                         <li key={book.id}>
                             <div className="book">
