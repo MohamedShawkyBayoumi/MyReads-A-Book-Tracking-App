@@ -38,9 +38,9 @@ class BooksApp extends React.Component {
         BooksAPI.search(query).then(books => {
             console.log(books)
             this.setState({ books })
-            
+
             if(books.error !== 'empty query'){
-              this.state.books
+              this.setState({ books })
             } else {
               this.setState({ books: [] })
             }
@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
       console.log(book)
       console.log(shelf.books[0].shelf)
 
-      shelf.books.shelf = book
+      shelf.books[0].shelf = book
 
       this.setState({ books: shelf.books })
 
