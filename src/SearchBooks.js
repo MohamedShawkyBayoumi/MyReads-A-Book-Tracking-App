@@ -18,8 +18,7 @@ class SearchBooks extends React.Component {
         if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
             // you will get undefiend error
             BooksAPI.search(query).then(books => {
-                console.log(books)
-                console.log(this.props.displayForSearch)
+
                 if (books.error !== 'empty query') {
                   this.setState({ displayForSearch: books })
                 } else {
@@ -32,15 +31,6 @@ class SearchBooks extends React.Component {
     
 
     render(){
-
-        /*
-        let showingBooks
-        if(this.state.books){
-            showingBooks = this.state.books.filter((book) => book.title)
-        } else {
-            showingBooks = this.state.books
-        }
-*/
 
         
         return (
