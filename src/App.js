@@ -24,7 +24,6 @@ class BooksApp extends React.Component {
 
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
-      //console.log(books)
       this.setState({ books })
       
     })
@@ -33,39 +32,23 @@ class BooksApp extends React.Component {
 
 
 
-/*
-  searchQuery = (query) => {
-    if (query !== '') { 
-      BooksAPI.search(query).then(books => {
-        if (books.error !== 'empty query') {
-          this.setState({ displayForSearch: books })
-        } else {
-          this.setState({ displayForSearch: [] })
-        }
-      })
-    }
-  }
 
-  */
-
-
-
-
-
-  changeShelf = (book, shelf) => {
+  changeShelf = (shelf, book) => {
     
+    let result = [];
+
     BooksAPI.update(book, shelf).then(() => {
       console.log(book)
       console.log(shelf.shelf)
 
-      shelf.shelf = book;
+      book.shelf = shelf;
 
       console.log(shelf)
 
       //this.setState({ books: [shelf] })
       
 
-      let result = this.state.books.filter((filtered) => filtered.id !== book.id)
+      result = this.state.books.filter((filtered) => filtered.id !== book.id)
       this.setState({ books: result.concat(book) })
 
     })
