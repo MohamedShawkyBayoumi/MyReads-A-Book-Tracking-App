@@ -62,9 +62,6 @@ Method Signature:
 update(book, shelf)
 ```
 
-You pass in the book instance, and the new shelf, then you simply do a book.shelf = shelf, and update the app state with this.setState
-Depending on how you do that, you might need to understand the concept of binding the 'this' keyword
-
 
 * book: `<Object>` containing at minimum an `id` attribute
 * shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]  
