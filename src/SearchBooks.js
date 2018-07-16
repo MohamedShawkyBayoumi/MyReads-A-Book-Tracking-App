@@ -21,7 +21,7 @@ class SearchBooks extends React.Component {
                 if(this.props.books){
                     this.props.books.map(mainBook => {
                         books.map(searchedBook => {
-                            if(mainBook.id == searchedBook.id){
+                            if(mainBook.id === searchedBook.id){
                                 searchedBook.shelf = mainBook.shelf
                             } else {
                                 searchedBook.shelf = 'none'
