@@ -15,34 +15,42 @@ class SearchBooks extends React.Component {
 
 
     searchQuery = (query) => {
-        if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
-            // you will get undefiend error
+        if (query !== '') {
+            
+
+            /*
+            Get a list of books from the search method of the API
+            If there is no result, clear the displayed book array
+            otherwise, loop over the list of returned book and compare it with the already shelved books
+            Set the shelf of the displayed book and update the result list
+            */
             BooksAPI.search(query).then(books => {
-                if(this.props.books){
-                    this.props.books.map(mainBook => {
-                        books.map(searchedBook => {
-                            if(mainBook.id === searchedBook.id){
-                                searchedBook.shelf = mainBook.shelf
+                if (!books || books.error) this.setState({displayForSearch: []})
+                else {
+                    books.map(foundBook => {
+                        this.props.books.forEach(book => {
+                            if(foundBook.id === book.id){
+                                foundBook.shelf = book.shelf
                             } else {
-                                searchedBook.shelf = 'none'
+                                foundBook.shelf = 'none';
                             }
                         })
+                        return foundBook;
                     })
+                    
+                    this.setState({ displayForSearch: books })
                 }
-
-                if (books.error !== 'empty query') {
-                  this.setState({ displayForSearch: books })
-                }
+                
             })
-        } else {
+        } else { // if empty query, clear the displayed books
             this.setState({ displayForSearch: [] })
         }
-      }
+    }
     
 
     render(){
 
-        
+        const { displayForSearch } = this.state;
         return (
             <div className="search-books">
             <div className="search-books-bar">
@@ -68,7 +76,7 @@ class SearchBooks extends React.Component {
             <div className="search-books-results">
               <ol className="books-grid">
               
-              {this.state.displayForSearch.map((book) => (
+              {displayForSearch && displayForSearch.map((book) => (
                   
                         <li key={book.id}>
                             <div className="book">

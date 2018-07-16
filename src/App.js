@@ -78,8 +78,8 @@ class BooksApp extends React.Component {
           
         )}/>
           
-        <Route path='/search' render={() => (
-          <SearchBooks books={this.state.books} searchQuery={this.searchQuery} displayForSearch={this.state.displayForSearch} changeShelf={this.changeShelf}/>
+        <Route path='/search' render={() => ( // What was it for? I was moving the search function here , but i moved it again in the search book again
+          <SearchBooks books={this.state.books} searchQuery={this.searchQuery} changeShelf={this.changeShelf}/>
         )}/>
           
         

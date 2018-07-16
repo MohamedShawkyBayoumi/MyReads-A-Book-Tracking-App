@@ -15,7 +15,7 @@ class BookShelf extends React.Component {
                 {/*If the book shelf matchs the shelf title then render it */}
                     {this.props.books.map((book) => book.shelf === this.props.title  && (
                         
-                        <li key={book.title}>
+                        <li key={book.id}>
                             <div className="book">
                                 <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
