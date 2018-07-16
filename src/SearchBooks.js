@@ -15,10 +15,21 @@ class SearchBooks extends React.Component {
 
 
     searchQuery = (query) => {
-        console.log(query)
         if (query !== '') { // you need to set condition for query to prevent send '' empty query to api 
             // you will get undefiend error
             BooksAPI.search(query).then(books => {
+                if(this.props.books){
+                    this.props.books.map(mainBook => {
+                        books.map(searchedBook => {
+                            if(mainBook.id == searchedBook.id){
+                                searchedBook.shelf = mainBook.shelf
+                            } else {
+                                searchedBook.shelf = 'none'
+                            }
+                        })
+                    })
+                }
+
                 if (books.error !== 'empty query') {
                   this.setState({ displayForSearch: books })
                 }
