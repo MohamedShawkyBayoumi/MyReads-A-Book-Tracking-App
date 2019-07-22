@@ -1,9 +1,14 @@
 {
-  "main.css": "static/css/main.de706e21.css",
-  "main.css.map": "static/css/main.de706e21.css.map",
-  "main.js": "static/js/main.396b1c5e.js",
-  "main.js.map": "static/js/main.396b1c5e.js.map",
-  "static\\media\\add.svg": "static/media/add.75d390e5.svg",
-  "static\\media\\arrow-back.svg": "static/media/arrow-back.20e8847d.svg",
-  "static\\media\\arrow-drop-down.svg": "static/media/arrow-drop-down.9d4e3f36.svg"
+  "main.css": "/MyReads-A-Book-Tracking-App/static/css/main.ae2f5b20.chunk.css",
+  "main.js": "/MyReads-A-Book-Tracking-App/static/js/main.adea82dc.chunk.js",
+  "main.js.map": "/MyReads-A-Book-Tracking-App/static/js/main.adea82dc.chunk.js.map",
+  "runtime~main.js": "/MyReads-A-Book-Tracking-App/static/js/runtime~main.e052a748.js",
+  "runtime~main.js.map": "/MyReads-A-Book-Tracking-App/static/js/runtime~main.e052a748.js.map",
+  "static/js/2.99c7cca1.chunk.js": "/MyReads-A-Book-Tracking-App/static/js/2.99c7cca1.chunk.js",
+  "static/js/2.99c7cca1.chunk.js.map": "/MyReads-A-Book-Tracking-App/static/js/2.99c7cca1.chunk.js.map",
+  "index.html": "/MyReads-A-Book-Tracking-App/index.html",
+  "precache-manifest.5b481c28c4e61d6cf97b1ce669ee60c1.js": "/MyReads-A-Book-Tracking-App/precache-manifest.5b481c28c4e61d6cf97b1ce669ee60c1.js",
+  "service-worker.js": "/MyReads-A-Book-Tracking-App/service-worker.js",
+  "static/css/main.ae2f5b20.chunk.css.map": "/MyReads-A-Book-Tracking-App/static/css/main.ae2f5b20.chunk.css.map",
+  "static/media/App.css": "/MyReads-A-Book-Tracking-App/static/media/arrow-drop-down.9d4e3f36.svg"
 }

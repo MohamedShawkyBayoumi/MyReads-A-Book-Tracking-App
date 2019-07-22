@@ -2,36 +2,24 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import SearchBooks from './SearchBooks'
-//import ListBooks from './ListBooks'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 
-
-
-
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     books: []
-
   }
 
-  componentDidMount(){
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-      
-    })
+  async componentDidMount(){
 
+    try{
+      let books = await BooksAPI.getAll();
+      this.setState({books});
+    }catch(e){
+      console.log(e);
+    }
   }
-
-
-
 
   changeShelf = (shelf, book) => {
     
@@ -41,51 +29,48 @@ class BooksApp extends React.Component {
 
       book.shelf = shelf;
 
-      result = this.state.books.filter((filtered) => filtered.id !== book.id)
+      result = this.state.books.filter(filtered => filtered.id !== book.id)
       this.setState({ books: result.concat(book) })
 
     })
   }
-
   
   render() {
+    const { books } = this.state;
     return (
       <div className="app">
         <Route exact path='/' render={() => (
             <div className="list-books">
-            <div className="list-books-title">
-            <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <div className="list-books-content">
                 <div>
-                    {/* What I did was passing a props "title" with the shelf value, and filter the books so only those with the 
-                  matching shelf are displayed in the related component */}
-                <h2 className="bookshelf-title">Currently Reading</h2>
-                <BookShelf title="currentlyReading" books={this.state.books} changeShelf={this.changeShelf}/>
 
-                <h2 className="bookshelf-title">Want to Read</h2>
-                <BookShelf title="wantToRead" books={this.state.books} changeShelf={this.changeShelf}/>
+                  <h2 className="bookshelf-title">Currently Reading</h2>
+                  <BookShelf title="currentlyReading" books={books} changeShelf={this.changeShelf}/>
 
-                <h2 className="bookshelf-title">Read</h2>
-                <BookShelf title="read" books={this.state.books} changeShelf={this.changeShelf}/>
+                  <h2 className="bookshelf-title">Want to Read</h2>
+                  <BookShelf title="wantToRead" books={books} changeShelf={this.changeShelf}/>
+
+                  <h2 className="bookshelf-title">Read</h2>
+                  <BookShelf title="read" books={books} changeShelf={this.changeShelf}/>
 
                 </div>
+              </div>
+              <div className="open-search">
+                <Link to='/search' >Add a book</Link>
+              </div>
             </div>
-            <div className="open-search">
-            <Link to='/search' >Add a book</Link>
-            </div>
-        </div>
           
         )}/>
           
-        <Route path='/search' render={() => ( // What was it for? I was moving the search function here , but i moved it again in the search book again
-          <SearchBooks books={this.state.books} searchQuery={this.searchQuery} changeShelf={this.changeShelf}/>
+        <Route path='/search' render={() => (
+          <SearchBooks books={books} searchQuery={this.searchQuery} changeShelf={this.changeShelf}/>
         )}/>
-          
-        
       </div>
     )
   }
 }
 
-export default BooksApp
+export default BooksApp;
