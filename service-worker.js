@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/MyReads-A-Book-Tracking-App/precache-manifest.16c86bed55b3b512de9670da0db7f09d.js"
+  "/MyReads-A-Book-Tracking-App/precache-manifest.e96c3a3c9a4fe8fedbfdcc297d343d21.js"
 );
 
 workbox.clientsClaim();
